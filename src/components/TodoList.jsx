@@ -1,12 +1,17 @@
 import TodoItem from "./TodoItem"
 
-const TodoList = () => {
+const TodoList = ({ tasks = [], onDeleteTask, onToggleTask }) => {
   return (
     <ul className="todo__list">
-      <TodoItem className={"todo-item"} id="task-1" title="soslo" />
-      <TodoItem className={"todo-item"} id="task-2" title="sosla" />
-      <div className="todo__empty-message"></div>
-
+      {tasks.map((task) => (
+        <TodoItem
+          className="todo-item"
+          key={task.id}
+          onDeleteTask={onDeleteTask}
+          onToggleTask={onToggleTask}
+          {...task}
+        />
+      ))}
     </ul>
   )
 }

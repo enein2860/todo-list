@@ -1,4 +1,4 @@
-const Field = ({ className, id, label, type = 'text' }) => {
+const Field = ({ className, id, label, type = 'text', ...props }) => {
   return (
     <div className={className}>
       <label
@@ -13,6 +13,7 @@ const Field = ({ className, id, label, type = 'text' }) => {
         placeholder=" "
         autoComplete="off"
         type={type}
+        {...props}
       />
     </div>
   )

@@ -1,4 +1,4 @@
-const TodoItem = ({ className, id, title, isDone = false }) => {
+const TodoItem = ({ className, id, title, isDone = false, onDeleteTask, onToggleTask }) => {
   return (
     <>
       <li className={`todo__item ${className}`}>
@@ -7,6 +7,7 @@ const TodoItem = ({ className, id, title, isDone = false }) => {
           id={id}
           type="checkbox"
           checked={isDone}
+          onClick={() => onToggleTask(id)}
         />
         <label
           className="todo-item__label"
@@ -18,6 +19,7 @@ const TodoItem = ({ className, id, title, isDone = false }) => {
           className="todo-item__delete-button"
           aria-label="Delete"
           title="Delete"
+          onChange={() => onDeleteTask(id)}
         >
           <svg
             width="20"
