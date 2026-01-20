@@ -19,7 +19,7 @@ const TodoItem = ({ className, id, title, isDone = false, onDeleteTask, onToggle
           className="todo-item__delete-button"
           aria-label="Delete"
           title="Delete"
-          onChange={() => onDeleteTask(id)}
+          onClick={() => onDeleteTask(id)}
         >
           <svg
             width="20"
