@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import InputTaskForm from "./InputTaskForm"
 import SearchTaskForm from "./SearchTaskForm"
 import TodoInfo from "./TodoInfo"
 import TodoList from "./TodoList"
+import Button from "./Button"
 
 
 const Todo = () => {
@@ -12,10 +13,19 @@ const Todo = () => {
     return localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : []
   })
 
+  const newTaskInputRef = useRef(null)
+  const firstIncompleteTaskRef = useRef(null)
+
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
 
+  useEffect(() => {
+    newTaskInputRef.current.focus()
+  }, [])
+
+
+  const firstIncompleteTaskId = tasks.find(task => task.isDone === false)?.id
 
   const onDeleteAllTasks = () => {
     setTasks([])
@@ -58,10 +68,12 @@ const Todo = () => {
         addTask={addTask}
         newTaskTitle={newTaskTitle}
         setNewTaskTitle={setNewTaskTitle}
+        newTaskInputRef={newTaskInputRef}
       />
       <SearchTaskForm onSearch={filterTask} />
       <TodoInfo total={tasks.length} onDeleteAllTasks={onDeleteAllTasks} />
-      <TodoList tasks={filteredTasks} onDeleteTask={deleteTask} onToggleTask={toggleTask} />
+      <Button className="button" type="button" onClick={() => firstIncompleteTaskRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>Show first incompleted task</Button>
+      <TodoList tasks={filteredTasks} onDeleteTask={deleteTask} onToggleTask={toggleTask} firstIncompleteTaskId={firstIncompleteTaskId} firstIncompleteTaskRef={firstIncompleteTaskRef} />
     </div>
   )
 }
