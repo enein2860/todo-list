@@ -1,10 +1,15 @@
-const Field = ({ className, id, label, type = 'text', value, onInput, inputRef }) => {
+const Field = ({
+  className,
+  id,
+  label,
+  type = "text",
+  value,
+  onInput,
+  inputRef,
+}) => {
   return (
     <div className={className}>
-      <label
-        className="field__label"
-        htmlFor={id}
-      >
+      <label className="field__label" htmlFor={id}>
         {label}
       </label>
       <input
@@ -18,7 +23,7 @@ const Field = ({ className, id, label, type = 'text', value, onInput, inputRef }
         onInput={onInput}
       />
     </div>
-  )
-}
+  );
+};
 
-export default Field
+export default Field;

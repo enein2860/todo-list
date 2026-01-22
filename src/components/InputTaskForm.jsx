@@ -1,13 +1,17 @@
-import Button from "./Button"
-import Field from "./Field"
+import Button from "./Button";
+import Field from "./Field";
+import { useContext } from "react";
+import { TaskContext } from "../TaskContext/TaskContext.jsx";
 
-const InputTaskForm = ({ addTask, newTaskTitle, setNewTaskTitle, newTaskInputRef }) => {
+const InputTaskForm = () => {
+  const { addTask, newTaskTitle, setNewTaskTitle, newTaskInputRef } =
+    useContext(TaskContext);
   const onSubmit = (event) => {
-    event.preventDefault()
-    addTask()
-    setNewTaskTitle('')
-    newTaskInputRef.current.focus()
-  }
+    event.preventDefault();
+    addTask();
+    setNewTaskTitle("");
+    newTaskInputRef.current.focus();
+  };
 
   return (
     <form className="todo__form" onSubmit={onSubmit}>
@@ -17,12 +21,14 @@ const InputTaskForm = ({ addTask, newTaskTitle, setNewTaskTitle, newTaskInputRef
         label="New task"
         type="text"
         value={newTaskTitle}
-        onInput={event => setNewTaskTitle(event.target.value)}
+        onInput={(event) => setNewTaskTitle(event.target.value)}
         inputRef={newTaskInputRef}
       />
-      <Button className="button" type="submit">Add</Button>
+      <Button className="button" type="submit">
+        Add
+      </Button>
     </form>
-  )
-}
+  );
+};
 
-export default InputTaskForm
+export default InputTaskForm;

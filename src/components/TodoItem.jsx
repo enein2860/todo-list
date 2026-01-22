@@ -1,45 +1,52 @@
-const TodoItem = ({ className, id, title, isDone = false, onDeleteTask, onToggleTask, ref }) => {
-  return (
-    <>
-      <li className={`todo__item ${className}`} ref={ref}>
-        <input
-          className="todo-item__checkbox"
-          id={id}
-          type="checkbox"
-          checked={isDone}
-          onClick={() => onToggleTask(id)}
-        />
-        <label
-          className="todo-item__label"
-          htmlFor={id}
-        >
-          {title}
-        </label>
-        <button
-          className="todo-item__delete-button"
-          aria-label="Delete"
-          title="Delete"
-          onClick={() => onDeleteTask(id)}
-        >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M15 5L5 15M5 5L15 15"
-              stroke="#757575"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
-      </li >
-    </>
-  )
-}
+import { forwardRef } from "react";
 
-export default TodoItem
+const TodoItem = forwardRef(({
+  className,
+  id,
+  title,
+  isDone = false,
+  onDeleteTask,
+  onToggleTask,
+}, ref) => {
+  return (
+    <li className={`todo__item ${className}`} ref={ref}>
+      <input
+        className="todo-item__checkbox"
+        id={id}
+        type="checkbox"
+        checked={isDone}
+        onClick={() => onToggleTask(id)}
+        readOnly // Add readOnly to suppress React warning since onClick handles logic, or onChange
+      />
+      <label className="todo-item__label" htmlFor={id}>
+        {title}
+      </label>
+      <button
+        className="todo-item__delete-button"
+        aria-label="Delete"
+        title="Delete"
+        onClick={() => onDeleteTask(id)}
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M15 5L5 15M5 5L15 15"
+            stroke="#757575"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
+    </li>
+  );
+});
+
+TodoItem.displayName = "TodoItem";
+
+export default TodoItem;
