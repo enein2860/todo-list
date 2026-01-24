@@ -6,6 +6,7 @@ const Field = ({
   value,
   onInput,
   inputRef,
+  error,
 }) => {
   return (
     <div className={className}>
@@ -14,14 +15,16 @@ const Field = ({
       </label>
       <input
         ref={inputRef}
-        className="field__input"
+        className={`field__input ${error ? "field__input--error" : ""}`}
         id={id}
         placeholder=" "
         autoComplete="off"
         type={type}
         value={value}
         onInput={onInput}
+
       />
+      {error && (<span className="field__error">{error}</span>)}
     </div>
   );
 };
