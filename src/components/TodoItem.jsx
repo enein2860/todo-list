@@ -15,7 +15,7 @@ const TodoItem = forwardRef(({
         id={id}
         type="checkbox"
         checked={isDone}
-        onClick={() => onToggleTask(id)}
+        onClick={() => onToggleTask(id, isDone)}
         readOnly // Add readOnly to suppress React warning since onClick handles logic, or onChange
       />
       <label className="todo-item__label" htmlFor={id}>

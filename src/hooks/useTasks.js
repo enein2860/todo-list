@@ -1,29 +1,20 @@
 import { useState, useEffect, useRef } from "react";
-import useTasksLocalStorage from "./useTasksLocalStorage";
+import taskAPI from "../api/taskAPI";
 
 const useTasks = () => {
-  const { saveTasks, savedTasks } = useTasksLocalStorage();
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [filter, setFilter] = useState("");
-  const [tasks, setTasks] = useState(() => {
-    return savedTasks ?? [];
-  });
+  const [tasks, setTasks] = useState([]);
 
   const newTaskInputRef = useRef(null);
 
   useEffect(() => {
-    saveTasks(tasks);
-  }, [tasks]);
-
-  useEffect(() => {
-    if (newTaskInputRef.current) {
-      newTaskInputRef.current.focus();
-    }
+    newTaskInputRef.current.focus();
+    taskAPI.getTasks().then(setTasks);
   }, []);
 
-
   const onDeleteAllTasks = () => {
-    setTasks([]);
+    taskAPI.deleteAllTasks(tasks).then(() => setTasks([]));
   };
 
   const addTask = () => {
@@ -34,20 +25,26 @@ const useTasks = () => {
         isDone: false,
       };
 
-      setTasks([...tasks, newTask]);
+      taskAPI.addTask(newTask).then((addedTask) => {
+        setTasks([...tasks, addedTask]);
+      });
     }
   };
 
   const deleteTask = (id) => {
-    setTasks((prev) => prev.filter((task) => task.id !== id));
+    taskAPI.deleteTask(id).then(() => {
+      setTasks((prev) => prev.filter((task) => task.id !== id));
+    });
   };
 
-  const toggleTask = (id) => {
-    setTasks((prev) =>
-      prev.map((task) =>
-        task.id === id ? { ...task, isDone: !task.isDone } : task,
-      ),
-    );
+  const toggleTask = (id, isDone) => {
+    taskAPI.toggleTask(id, isDone).then(() => {
+      setTasks((prev) =>
+        prev.map((task) =>
+          task.id === id ? { ...task, isDone: !task.isDone } : task,
+        ),
+      );
+    });
   };
 
   const filterTask = (query) => {
@@ -70,7 +67,6 @@ const useTasks = () => {
     setNewTaskTitle,
     newTaskTitle,
   };
-
 };
 
 export default useTasks;
