@@ -1,4 +1,3 @@
-import tasks from "../hooks/useTasks"
 const URL = "http://localhost:3001/tasks";
 
 const taskAPI = {
