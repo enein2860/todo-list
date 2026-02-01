@@ -14,7 +14,7 @@
 
 *   **Frontend:** React 19, Vite
 *   **Backend (Mock):** JSON Server (хранение данных в `db.json5`)
-*   **Стилизация:** CSS (с использованием методологии, близкой к BEM/Modules), Normalize.css
+*   **Стилизация:** CSS (с использованием BEM методологии), Normalize.css
 *   **Линтинг:** ESLint
 
 ## Установка и запуск
