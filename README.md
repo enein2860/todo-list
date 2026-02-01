@@ -1,12 +1,67 @@
-# React + Vite
+# React Todo App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Простое приложение для управления задачами (To-Do List), разработанное с использованием React и Vite. Для имитации бэкенда используется JSON Server.
 
-Currently, two official plugins are available:
+## Функционал
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+*   **Добавление задач:** Создание новых задач.
+*   **Просмотр списка:** Отображение всех текущих задач.
+*   **Поиск:** Фильтрация задач по названию в реальном времени.
+*   **Статус задач:** Отметка задач как выполненных/невыполненных.
+*   **Удаление:** Удаление отдельных задач или очистка всего списка.
 
-## Expanding the ESLint configuration
+## Технологический стек
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+*   **Frontend:** React 19, Vite
+*   **Backend (Mock):** JSON Server (хранение данных в `db.json5`)
+*   **Стилизация:** CSS (с использованием методологии, близкой к BEM/Modules), Normalize.css
+*   **Линтинг:** ESLint
+
+## Установка и запуск
+
+Для полноценной работы приложения необходимо запустить как клиентскую часть, так и сервер для имитации API.
+
+1.  **Клонирование репозитория:**
+    ```bash
+    git clone https://github.com/enein2860/todo-list.git
+    cd todo-react
+    ```
+
+2.  **Установка зависимостей:**
+    ```bash
+    npm install
+    ```
+
+3.  **Запуск сервера (Backend):**
+    Приложение использует `json-server` для хранения задач. Откройте терминал и выполните:
+    ```bash
+    npm run server
+    ```
+    API будет доступно по адресу `http://localhost:3001/tasks`.
+
+4.  **Запуск приложения (Frontend):**
+    Не закрывая терминал с сервером, откройте новое окно терминала и выполните:
+    ```bash
+    npm run dev
+    ```
+    Приложение откроется в браузере (обычно по адресу `http://localhost:5173`).
+
+## Доступные скрипты
+
+В файле `package.json` определены следующие команды:
+
+*   `npm run dev`: Запуск приложения в режиме разработки (Vite).
+*   `npm run server`: Запуск JSON Server (порт 3001).
+*   `npm run build`: Сборка проекта для продакшена.
+*   `npm run preview`: Локальный просмотр собранной версии.
+*   `npm run lint`: Проверка кода линтером (ESLint).
+*   `npm run deploy`: Деплой приложения на GitHub Pages (папка `dist`).
+
+## Структура проекта
+
+*   `src/api/` — Логика взаимодействия с API (`taskAPI.js`).
+*   `src/components/` — React-компоненты (формы ввода/поиска, элементы списка).
+*   `src/hooks/` — Кастомные хуки (основная логика в `useTasks.js`).
+*   `src/styles/` — Стилизация проекта.
+*   `src/TaskContext/` — React Context для управления состоянием.
+*   `db.json5` — Файл данных для JSON Server.
